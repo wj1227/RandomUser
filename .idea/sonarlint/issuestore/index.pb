@@ -35,3 +35,5 @@ y
 Iapp/src/main/java/com/jay/randomuser/view/base/BaseRecyclerViewAdapter.kt,d/8/d851390da2fe107f0d4dfda4465024d18793109c
 n
 >app/src/main/java/com/jay/randomuser/view/base/BaseActivity.kt,1/d/1d1902fa3a29b17de0ce8d6151be553362e06eb1
+m
+=app/src/main/java/com/jay/randomuser/view/main/MainAdapter.kt,8/0/80c9a825a045f2f64e0e120de84cf5874ba5c677

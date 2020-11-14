@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:onClick="@{() -> viewModel.onGenderFilter()}" />
+            bind:onClick="@{() -> viewModel.input.onGenderFilter()}" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/srl_result"
@@ -33,7 +33,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_gender">
+            app:layout_constraintTop_toBottomOf="@id/btn_gender"
+            bind:isRefresh="@{viewModel.output.isRefresh}"
+            bind:onRefresh="@{() -> viewModel.input.onRefresh()}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_result"
@@ -56,7 +58,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1"
-            bind:onClick="@{() -> viewModel.onScrollTop()}" />
+            bind:onClick="@{() -> viewModel.input.onScrollTop()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
