@@ -14,6 +14,7 @@ import java.io.PipedReader
 interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewModelType.Output> {
     interface Input {
         fun onGenderFilter()
+        fun onScrollTop()
     }
 
     interface Output {
@@ -23,8 +24,7 @@ interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewMod
 
 class MainViewModel(
     private val api: RemoteApi
-)
-    : BaseViewModel(), MainViewModelType, MainViewModelType.Input, MainViewModelType.Output {
+) : BaseViewModel(), MainViewModelType, MainViewModelType.Input, MainViewModelType.Output {
     private val TAG = javaClass.simpleName
     override val input: MainViewModelType.Input
         get() = this
@@ -35,10 +35,6 @@ class MainViewModel(
     override val gender: LiveData<String>
         get() = _gender
 
-    override fun onGenderFilter() {
-        //
-    }
-
     init {
         api.getUsers(1, 1, "")
             .subscribeOn(Schedulers.io())
@@ -48,5 +44,13 @@ class MainViewModel(
             }, {
                 Log.d(TAG, "$it: ")
             }).addTo(compositeDisposable)
+    }
+
+    override fun onGenderFilter() {
+        //
+    }
+
+    override fun onScrollTop() {
+        //
     }
 }
