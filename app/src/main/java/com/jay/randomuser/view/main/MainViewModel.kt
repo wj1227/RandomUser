@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.jay.randomuser.data.api.RemoteApi
 import com.jay.randomuser.view.base.BaseViewModel
 import com.jay.randomuser.view.base.ViewModelType
+import com.jay.randomuser.view.main.model.UserUiModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
@@ -23,6 +24,7 @@ interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewMod
         val gender: LiveData<String>
         val scrollToTop: LiveData<Unit>
         val isRefresh: LiveData<Boolean>
+        val users: LiveData<List<UserUiModel>>
     }
 }
 
@@ -52,6 +54,10 @@ class MainViewModel(
     private val _gender: MutableLiveData<String> = MutableLiveData()
     override val gender: LiveData<String>
         get() = _gender
+
+    private val _users: MutableLiveData<List<UserUiModel>> = MutableLiveData()
+    override val users: LiveData<List<UserUiModel>>
+        get() = _users
 
     init {
 

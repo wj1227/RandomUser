@@ -78,6 +78,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/utils/databinding/RecyclerViewExt.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/utils/databinding/SwipeRefreshLayoutExt.kt">
           <value>
             <set />
@@ -144,6 +149,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/item_user.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sooakim_SfoIDE_1/app/src/main/java/io/github/sooakim/sfoide/utils/databinding/RecyclerViewExt.kt">
           <value>
             <set />
           </value>
