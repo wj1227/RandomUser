@@ -128,6 +128,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/base/FragmentLauncher.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/base/ViewModelType.kt">
           <value>
             <set />
@@ -189,6 +194,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../sooakim_SfoIDE_1/app/src/main/java/io/github/sooakim/sfoide/utils/databinding/ImageViewExt.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sooakim_SfoIDE_1/app/src/main/java/io/github/sooakim/sfoide/utils/databinding/RadioGroupExt.kt">
           <value>
             <set />
           </value>

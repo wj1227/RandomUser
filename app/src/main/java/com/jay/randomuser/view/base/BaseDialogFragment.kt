@@ -10,7 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.jay.randomuser.BR
 
-abstract class BaseDialogFragment<VDB : ViewDataBinding, VM : BaseViewModel>(
+abstract class BaseDialogFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
     @LayoutRes
     protected val layoutResId: Int
 ) : DialogFragment() {

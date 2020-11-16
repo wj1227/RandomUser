@@ -1,6 +1,7 @@
 package com.jay.randomuser.view.main
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.jay.randomuser.R
 import com.jay.randomuser.databinding.ActivityMainBinding
 import com.jay.randomuser.view.base.BaseActivity
@@ -21,9 +22,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         initAdapter()
     }
 
-    private fun initViewModelObserving() {
+    override fun initViewModelObserving() {
         with(viewModel) {
-
+            output.genderFilter.observe(this@MainActivity, Observer {
+                //GenderSelectFragment.newInstance()
+            })
         }
     }
 
