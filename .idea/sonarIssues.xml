@@ -108,6 +108,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/base/BaseDialogFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/base/BaseFragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/base/BaseRecyclerViewAdapter.kt">
           <value>
             <set />
@@ -119,6 +129,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/base/ViewModelType.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/main/GenderSelectFragment.kt">
           <value>
             <set />
           </value>
@@ -163,6 +178,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/fragment_gender_select.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/item_user.xml">
           <value>
             <set />
@@ -189,6 +209,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../sooakim_SfoIDE_1/app/src/main/java/io/github/sooakim/sfoide/view/base/BaseActivity.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sooakim_SfoIDE_1/app/src/main/java/io/github/sooakim/sfoide/view/base/BaseDialogFragment.kt">
           <value>
             <set />
           </value>
