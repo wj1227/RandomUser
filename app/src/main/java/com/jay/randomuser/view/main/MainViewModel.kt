@@ -1,6 +1,5 @@
 package com.jay.randomuser.view.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jay.randomuser.data.api.RemoteApi
@@ -8,7 +7,6 @@ import com.jay.randomuser.view.base.BaseViewModel
 import com.jay.randomuser.view.base.ViewModelType
 import com.jay.randomuser.view.main.model.UserUiModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -65,10 +63,16 @@ class MainViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "${it.results.size}, $it: ")
+
             }, {
-                Log.d(TAG, "$it: ")
-            }).addTo(compositeDisposable)
+
+            }).let(compositeDisposable::add)
+//            .subscribe({
+//                Log.d(TAG, "${it.results.size}, $it: ")
+//                _users.value
+//            }, {
+//                Log.d(TAG, "$it: ")
+//            }).addTo(compositeDisposable)
     }
 
     override fun onGenderFilter() {

@@ -37,3 +37,9 @@ n
 >app/src/main/java/com/jay/randomuser/view/base/BaseActivity.kt,1/d/1d1902fa3a29b17de0ce8d6151be553362e06eb1
 m
 =app/src/main/java/com/jay/randomuser/view/main/MainAdapter.kt,8/0/80c9a825a045f2f64e0e120de84cf5874ba5c677
+q
+Aapp/src/main/java/com/jay/randomuser/utils/databinding/ViewExt.kt,4/6/4687a8c503f1703ac3b2d947bfff845c2c508279
+
+Oapp/src/main/java/com/jay/randomuser/utils/databinding/SwipeRefreshLayoutExt.kt,b/9/b9389d600d67caa8da24313c6285ab1bb3689ead
+y
+Iapp/src/main/java/com/jay/randomuser/utils/databinding/RecyclerViewExt.kt,f/a/fad5c3982619d571e54c9ac65e80e8334a3d1e84
