@@ -1,7 +1,6 @@
 package com.jay.randomuser.view.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.jay.randomuser.R
 import com.jay.randomuser.databinding.ActivityMainBinding
 import com.jay.randomuser.view.base.BaseActivity

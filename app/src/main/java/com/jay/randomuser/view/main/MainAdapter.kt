@@ -21,9 +21,10 @@ class MainAdapter : BaseRecyclerViewAdapter<UserUiModel>() {
 
     class ItemViewHolder(
         private val binding: ItemUserBinding
-    ) : BaseViewHolder<UserUiModel>(binding = binding) {
+    ) : BaseViewHolder<UserUiModel>(binding) {
 
         override fun bind(item: UserUiModel) {
+            super.bind(item)
             binding.root.setOnClickListener {
                 item.onclick.invoke()
             }

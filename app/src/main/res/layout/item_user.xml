@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-<!--        bind:circleImage="@{item.profileImagePath}"-->
         <ImageView
             android:id="@+id/iv_profile"
             android:layout_width="60dp"
@@ -23,7 +22,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-             />
+            bind:circleImage="@{item.profileImagePath}" />
 
         <TextView
             android:id="@+id/tv_name"
