@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-<!--        bind:circleImage="@{item.profileImagePath}"-->
+        <!--bind:circleImage="@{item.profileImagePath}"-->
         <ImageView
             android:id="@+id/iv_profile"
             android:layout_width="60dp"
