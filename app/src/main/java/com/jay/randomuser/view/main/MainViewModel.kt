@@ -1,6 +1,5 @@
 package com.jay.randomuser.view.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jay.randomuser.data.api.RemoteApi
@@ -12,7 +11,6 @@ import com.jay.randomuser.view.main.model.UserUiModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -85,14 +83,14 @@ class MainViewModel(
 
         val randomUser = seedWithGender
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { showRefreshLoading() }
+            .doOnNext { showRefreshLoading(); showLoading() }
             .switchMapSingle { (seed, gender) ->
                 api.getUsers(page = 0, results = RESULT_COUNT, seed = seed, gender = gender)
                     .subscribeOn(Schedulers.io())
             }
             .materialize()
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { hideRefreshLoading() }
+            .doOnNext { hideRefreshLoading(); hideLoading() }
             .share()
 
         randomUser.filter { it.isOnNext }
