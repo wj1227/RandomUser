@@ -106,6 +106,10 @@ class MainViewModel(
             .subscribe(_users::setValue)
             .let(compositeDisposable::add)
 
+        _genderSubject.observeOn(AndroidSchedulers.mainThread())
+            .subscribe(_gender::setValue)
+            .let(compositeDisposable::add)
+
     }
 
 
