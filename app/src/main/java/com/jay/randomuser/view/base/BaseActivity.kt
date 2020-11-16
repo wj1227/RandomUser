@@ -10,7 +10,7 @@ import com.jay.randomuser.BR
 abstract class BaseActivity<VDB: ViewDataBinding, VM: ViewModelType<*, *>>(
     @LayoutRes
     protected val layoutResId: Int
-): AppCompatActivity(){
+) : AppCompatActivity() {
     protected lateinit var viewDataBinding: VDB
     protected abstract val viewModel: VM
 
@@ -20,5 +20,9 @@ abstract class BaseActivity<VDB: ViewDataBinding, VM: ViewModelType<*, *>>(
             lifecycleOwner = this@BaseActivity
             setVariable(BR.viewModel, viewModel)
         }
+
+        initViewModelObserving()
     }
+
+    abstract fun initViewModelObserving()
 }

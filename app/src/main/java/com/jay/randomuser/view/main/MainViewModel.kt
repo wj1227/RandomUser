@@ -1,6 +1,5 @@
 package com.jay.randomuser.view.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jay.randomuser.data.api.RemoteApi
@@ -12,7 +11,6 @@ import com.jay.randomuser.view.main.model.UserUiModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -32,6 +30,7 @@ interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewMod
         val scrollToTop: LiveData<Unit>
         val isRefresh: LiveData<Boolean>
         val users: LiveData<List<UserUiModel>>
+        val genderFilter: LiveData<Unit>
     }
 }
 
@@ -70,6 +69,10 @@ class MainViewModel(
     override val users: LiveData<List<UserUiModel>>
         get() = _users
 
+    private val _genderFilter: MutableLiveData<Unit> = MutableLiveData()
+    override val genderFilter: LiveData<Unit>
+        get() = _genderFilter
+
     init {
         val seedGenerator = _onRefresh
             .startWith(Unit)
@@ -85,14 +88,14 @@ class MainViewModel(
 
         val randomUser = seedWithGender
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { showRefreshLoading() }
+            .doOnNext { showRefreshLoading(); showLoading() }
             .switchMapSingle { (seed, gender) ->
                 api.getUsers(page = 0, results = RESULT_COUNT, seed = seed, gender = gender)
                     .subscribeOn(Schedulers.io())
             }
             .materialize()
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { hideRefreshLoading() }
+            .doOnNext { hideRefreshLoading(); hideLoading() }
             .share()
 
         randomUser.filter { it.isOnNext }
@@ -108,6 +111,10 @@ class MainViewModel(
 
         _genderSubject.observeOn(AndroidSchedulers.mainThread())
             .subscribe(_gender::setValue)
+            .let(compositeDisposable::add)
+
+        _onGenderClick.observeOn(AndroidSchedulers.mainThread())
+            .subscribe(_genderFilter::setValue)
             .let(compositeDisposable::add)
 
     }
