@@ -133,12 +133,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/main/mapper/UserListMapper.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/main/model/UiModel.kt">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/main/model/UserUiModel.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/jay/randomuser/view/mapper/Mapper.kt">
           <value>
             <set />
           </value>
@@ -174,6 +184,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../sooakim_SfoIDE_1/app/src/main/java/io/github/sooakim/sfoide/view/main/MainViewModel.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sooakim_SfoIDE_1/app/src/main/java/io/github/sooakim/sfoide/view/main/mapper/UserListMapper.kt">
           <value>
             <set />
           </value>
