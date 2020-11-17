@@ -23,6 +23,7 @@ interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewMod
         fun onRefresh()
         fun onMaleClick()
         fun onFeMaleClick()
+        fun onLoadMore()
     }
 
     interface Output {
@@ -134,6 +135,10 @@ class MainViewModel(
 
     override fun onScrollTop() {
         _scrollToTopSubject.onNext(Unit)
+    }
+
+    override fun onLoadMore() {
+        //
     }
 
     override fun onRefresh() {
