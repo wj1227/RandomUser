@@ -6,6 +6,7 @@ import com.jay.randomuser.R
 import com.jay.randomuser.databinding.ActivityMainBinding
 import com.jay.randomuser.utils.ext.showSafely
 import com.jay.randomuser.view.base.BaseActivity
+import com.jay.randomuser.view.main.genderselect.GenderSelectFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

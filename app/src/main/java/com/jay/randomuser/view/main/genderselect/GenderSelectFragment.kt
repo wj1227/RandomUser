@@ -1,9 +1,10 @@
-package com.jay.randomuser.view.main
+package com.jay.randomuser.view.main.genderselect
 
 import com.jay.randomuser.R
 import com.jay.randomuser.databinding.FragmentGenderSelectBinding
 import com.jay.randomuser.view.base.BaseDialogFragment
 import com.jay.randomuser.view.base.DialogFragmentLauncher
+import com.jay.randomuser.view.main.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.reflect.KClass
 
