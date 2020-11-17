@@ -51,6 +51,9 @@ class MainViewModel(
     private val _scrollToTopSubject: PublishSubject<Unit> = PublishSubject.create()
     private val _userClickSubject: PublishSubject<UserResponse> = PublishSubject.create()
     private val _userSubject: BehaviorSubject<List<UserUiModel>> = BehaviorSubject.createDefault(emptyList())
+    private val _loadMoreSubject: PublishSubject<Unit> = PublishSubject.create()
+    private val _isPagingSubject: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
+    private val _pageSubject: BehaviorSubject<Int> = BehaviorSubject.create()
 
     private val _userMapper: UserListMapper = UserListMapper(onClick = _userClickSubject)
 
@@ -99,11 +102,40 @@ class MainViewModel(
             .doOnNext { hideRefreshLoading(); hideLoading() }
             .share()
 
+        val seedWithGenderWithPage = Observable.combineLatest(
+            seedWithGender,
+            _pageSubject,
+            BiFunction { seedWithGender: Pair<String, String>, page: Int -> Pair(seedWithGender, page) }
+        )
+            .share()
+
+        val paging = _loadMoreSubject
+            .filter { _isPagingSubject.value != true }
+            .doOnNext { _isPagingSubject.onNext(true) }
+            .withLatestFrom(
+                seedWithGenderWithPage,
+                BiFunction { _: Unit, seedWithGenderWithPage: Pair<Pair<String, String>, Int> -> seedWithGenderWithPage }
+            )
+            .switchMapSingle { (seedWithGender, page) ->
+                val (seed, gender) = seedWithGender
+                api.getUsers(page = page, results = RESULT_COUNT, seed = seed, gender = gender)
+                    .subscribeOn(Schedulers.io())
+            }
+            .materialize()
+            .doOnNext { _isPagingSubject.onNext(false) }
+            .share()
+
         randomUser.filter { it.isOnNext }
             .map { it.value }
             .map { it.results }
             .map(_userMapper::mapper)
             .subscribe(_userSubject::onNext)
+            .let(compositeDisposable::add)
+
+        paging.filter { it.isOnNext }
+            .map { it.value }
+            .map { it.info.page + 1 }
+            .subscribe(_pageSubject::onNext)
             .let(compositeDisposable::add)
 
         _userSubject.observeOn(AndroidSchedulers.mainThread())
@@ -117,7 +149,6 @@ class MainViewModel(
         _onGenderClick.observeOn(AndroidSchedulers.mainThread())
             .subscribe(_genderFilter::setValue)
             .let(compositeDisposable::add)
-
     }
 
 
@@ -138,7 +169,7 @@ class MainViewModel(
     }
 
     override fun onLoadMore() {
-        //
+        _loadMoreSubject.onNext(Unit)
     }
 
     override fun onRefresh() {
