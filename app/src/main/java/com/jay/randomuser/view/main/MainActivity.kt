@@ -6,6 +6,8 @@ import com.jay.randomuser.R
 import com.jay.randomuser.databinding.ActivityMainBinding
 import com.jay.randomuser.utils.ext.showSafely
 import com.jay.randomuser.view.base.BaseActivity
+import com.jay.randomuser.view.detail.DetailActivity
+import com.jay.randomuser.view.main.genderselect.GenderSelectFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -28,6 +30,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
             output.genderFilter.observe(this@MainActivity, Observer {
                 GenderSelectFragment.newInstance()
                     .showSafely(supportFragmentManager, GenderSelectFragment.tag)
+            })
+            output.scrollToTop.observe(this@MainActivity, Observer {
+                viewDataBinding.rvResult.layoutManager?.smoothScrollToPosition(
+                    viewDataBinding.rvResult,
+                    null,
+                    0
+                )
+            })
+            startDetail.observe(this@MainActivity, Observer { data ->
+                data.consume {
+                    DetailActivity.startActivity(this@MainActivity, it)
+                }
             })
         }
     }

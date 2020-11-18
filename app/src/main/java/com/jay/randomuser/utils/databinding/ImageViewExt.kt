@@ -20,3 +20,10 @@ fun ImageView.bindCircleImage(imagePath: String?) {
         ))
         .into(this)
 }
+
+@BindingAdapter("squareImage")
+fun ImageView.bindSquareImage(imagePath: String?) {
+    Glide.with(this)
+        .load(imagePath)
+        .into(this)
+}

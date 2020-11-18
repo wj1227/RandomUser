@@ -47,3 +47,13 @@ w
 Gapp/src/main/java/com/jay/randomuser/view/main/mapper/UserListMapper.kt,8/d/8dfbedf141285d9271abf484d477426e35284a71
 j
 :app/src/main/java/com/jay/randomuser/view/mapper/Mapper.kt,7/d/7dd984c1faeb213737bd4619b94b56be1442b89f
+v
+Fapp/src/main/java/com/jay/randomuser/utils/databinding/ImageViewExt.kt,5/3/53b602a7cf9351a25b46ea4961a9192781a0dc72
+r
+Bapp/src/main/java/com/jay/randomuser/view/base/FragmentLauncher.kt,0/5/056f7f0c28b0e76b63f4aa5b377530dc2bbca4ba
+t
+Dapp/src/main/java/com/jay/randomuser/view/base/BaseDialogFragment.kt,5/2/528aa6df4b084e3525c859f29005eb8626713c9e
+s
+Capp/src/main/java/com/jay/randomuser/utils/ext/DialogFragmentExt.kt,d/7/d74ebbc05909ff0b6ca63f82d011187bbca7ea03
+r
+Bapp/src/main/java/com/jay/randomuser/view/detail/DetailActivity.kt,8/0/800c7fcb0a5ac63fab5962b05663e710ac312ea0
