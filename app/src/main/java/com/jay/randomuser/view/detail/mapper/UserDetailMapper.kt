@@ -7,7 +7,7 @@ import com.jay.randomuser.view.mapper.Mapper
 object UserDetailMapper : Mapper<UserResponse, UserDetailModel> {
     override fun mapper(from: UserResponse): UserDetailModel {
         return UserDetailModel(
-            profileImagePath = from.picture.thumbnail,
+            profileImagePath = from.picture.large,
             name = "이름: ${from.name.title}. ${from.name.first} ${from.name.last}",
             email = "이메일(클릭시 이동) ${from.email}",
             cellPhone = "휴대전화(클릭시 이동): ${from.cell}",

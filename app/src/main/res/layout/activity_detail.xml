@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -25,62 +25,63 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                bind:squareImage="@{viewModel.output.user.profileImagePath}" />
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:text="@{viewModel.output.user.name}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_profile"
-                tools:text="이름" />
+                app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:text="@{viewModel.output.user.email}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_name"
-                tools:text="이메일" />
+                app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
             <TextView
                 android:id="@+id/tv_cellphone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:text="@{viewModel.output.user.cellPhone}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_email"
-                tools:text="핸드폰번호" />
+                app:layout_constraintTop_toBottomOf="@id/tv_email" />
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:text="@{viewModel.output.user.phone}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_cellphone"
-                tools:text="집전화번호" />
+                app:layout_constraintTop_toBottomOf="@id/tv_cellphone" />
 
             <TextView
                 android:id="@+id/tv_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:text="@{viewModel.output.user.address}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_phone"
-                tools:text="주소" />
+                app:layout_constraintTop_toBottomOf="@id/tv_phone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
