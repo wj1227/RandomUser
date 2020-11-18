@@ -126,7 +126,10 @@ class MainViewModel(
 
         refreshing.filter { it.isOnNext }
             .map { it.value }
-            .map { it.info.page }
+            .map { 
+                it.info.page
+                Log.d(TAG, "${it.info.page}: ")
+            }
             .subscribe(_pageSubject::onNext)
             .let(compositeDisposable::add)
 
