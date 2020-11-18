@@ -94,14 +94,14 @@ class MainViewModel(
 
         val refreshing = seedWithGender
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { showRefreshLoading(); showLoading() }
+            .doOnNext { _isRefreshSubject.onNext(true) }
             .switchMapSingle { (seed, gender) ->
                 api.getUsers(page = 0, results = RESULT_COUNT, seed = seed, gender = gender)
                     .subscribeOn(Schedulers.io())
             }
             .materialize()
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { hideRefreshLoading(); hideLoading() }
+            .doOnNext { _isRefreshSubject.onNext(false) }
             .share()
 
         val seedWithGenderWithPage = Observable.combineLatest(
@@ -116,7 +116,6 @@ class MainViewModel(
             .doOnNext { _isPagingSubject.onNext(true) }
             .withLatestFrom(seedWithGenderWithPage, BiFunction { _: Unit, seedWithGenderWithPage: Pair<Pair<String, String>, Int> -> seedWithGenderWithPage })
             .switchMapSingle { (seedWithGender, page) ->
-                Log.d(TAG, "$seedWithGender, $page")
                 val (seed, gender) = seedWithGender
                 api.getUsers(page = page, results = RESULT_COUNT, seed = seed, gender = gender)
                     .subscribeOn(Schedulers.io())
@@ -127,8 +126,15 @@ class MainViewModel(
 
         refreshing.filter { it.isOnNext }
             .map { it.value }
-            .map { it.info.page + 1}
+            .map { it.info.page }
             .subscribe(_pageSubject::onNext)
+            .let(compositeDisposable::add)
+
+        refreshing.filter { it.isOnNext }
+            .map { it.value }
+            .map { it.results }
+            .map(_userMapper::mapper)
+            .subscribe(_userSubject::onNext)
             .let(compositeDisposable::add)
 
         paging.filter { it.isOnNext }
@@ -156,15 +162,9 @@ class MainViewModel(
             .subscribe(_genderFilter::setValue)
             .let(compositeDisposable::add)
 
-    }
-
-
-    private fun showRefreshLoading() {
-        _isRefresh.value = true
-    }
-
-    private fun hideRefreshLoading() {
-        _isRefresh.value = false
+        _isRefreshSubject.observeOn(AndroidSchedulers.mainThread())
+            .subscribe(_isRefresh::setValue)
+            .let(compositeDisposable::add)
     }
 
     override fun onGenderFilter() {
