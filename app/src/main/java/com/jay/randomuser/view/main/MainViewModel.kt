@@ -33,6 +33,7 @@ interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewMod
         val isRefresh: LiveData<Boolean>
         val users: LiveData<List<UserUiModel>>
         val genderFilter: LiveData<Unit>
+        val startDetail: LiveData<UserResponse>
     }
 }
 
@@ -79,6 +80,10 @@ class MainViewModel(
     private val _genderFilter: MutableLiveData<Unit> = MutableLiveData()
     override val genderFilter: LiveData<Unit>
         get() = _genderFilter
+
+    private val _startDetail: MutableLiveData<UserResponse> = MutableLiveData()
+    override val startDetail: LiveData<UserResponse>
+        get() = _startDetail
 
     init {
         val seedGenerator = _onRefreshSubject
@@ -172,6 +177,10 @@ class MainViewModel(
 
         _scrollToTopSubject.observeOn(AndroidSchedulers.mainThread())
             .subscribe(_scrollToTop::setValue)
+            .let(compositeDisposable::add)
+
+        _userClickSubject.observeOn(AndroidSchedulers.mainThread())
+            .subscribe(_startDetail::setValue)
             .let(compositeDisposable::add)
     }
 

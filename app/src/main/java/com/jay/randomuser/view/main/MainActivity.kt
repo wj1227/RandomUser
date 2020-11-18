@@ -6,6 +6,7 @@ import com.jay.randomuser.R
 import com.jay.randomuser.databinding.ActivityMainBinding
 import com.jay.randomuser.utils.ext.showSafely
 import com.jay.randomuser.view.base.BaseActivity
+import com.jay.randomuser.view.detail.DetailActivity
 import com.jay.randomuser.view.main.genderselect.GenderSelectFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +37,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
                     null,
                     0
                 )
+            })
+            startDetail.observe(this@MainActivity, Observer { data ->
+                //DetailActivity.start
             })
         }
     }
