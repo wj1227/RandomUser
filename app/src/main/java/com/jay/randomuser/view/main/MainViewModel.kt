@@ -7,15 +7,18 @@ import com.jay.randomuser.data.api.RemoteApi
 import com.jay.randomuser.data.response.UserResponse
 import com.jay.randomuser.view.base.BaseViewModel
 import com.jay.randomuser.view.base.ViewModelType
+import com.jay.randomuser.view.detail.SingleData
 import com.jay.randomuser.view.main.mapper.UserListMapper
 import com.jay.randomuser.view.main.model.UserUiModel
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewModelType.Output> {
     interface Input {
@@ -33,6 +36,7 @@ interface MainViewModelType : ViewModelType<MainViewModelType.Input, MainViewMod
         val isRefresh: LiveData<Boolean>
         val users: LiveData<List<UserUiModel>>
         val genderFilter: LiveData<Unit>
+        //val startDetail: LiveData<SingleData<UserResponse>>
         val startDetail: LiveData<UserResponse>
     }
 }
@@ -81,6 +85,9 @@ class MainViewModel(
     override val genderFilter: LiveData<Unit>
         get() = _genderFilter
 
+//    private val _startDetail: MutableLiveData<SingleData<UserResponse>> = MutableLiveData()
+//    override val startDetail: LiveData<SingleData<UserResponse>>
+//        get() = _startDetail
     private val _startDetail: MutableLiveData<UserResponse> = MutableLiveData()
     override val startDetail: LiveData<UserResponse>
         get() = _startDetail
@@ -179,7 +186,10 @@ class MainViewModel(
             .subscribe(_scrollToTop::setValue)
             .let(compositeDisposable::add)
 
-        _userClickSubject.observeOn(AndroidSchedulers.mainThread())
+        _userClickSubject
+            //.map { SingleData(it) }
+            .throttleFirst(1000, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(_startDetail::setValue)
             .let(compositeDisposable::add)
     }

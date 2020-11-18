@@ -1,5 +1,7 @@
 package com.jay.randomuser.view.main
 
+import android.content.Intent
+import android.content.Intent.EXTRA_USER
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.jay.randomuser.R
@@ -39,7 +41,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
                 )
             })
             startDetail.observe(this@MainActivity, Observer { data ->
-                //DetailActivity.start
+                DetailActivity.startActivity(this@MainActivity, data)
+//                data.consume {
+//                    DetailActivity.startActivity(this@MainActivity, it)
+//                }
             })
         }
     }
