@@ -53,3 +53,7 @@ r
 Bapp/src/main/java/com/jay/randomuser/view/base/FragmentLauncher.kt,0/5/056f7f0c28b0e76b63f4aa5b377530dc2bbca4ba
 t
 Dapp/src/main/java/com/jay/randomuser/view/base/BaseDialogFragment.kt,5/2/528aa6df4b084e3525c859f29005eb8626713c9e
+s
+Capp/src/main/java/com/jay/randomuser/utils/ext/DialogFragmentExt.kt,d/7/d74ebbc05909ff0b6ca63f82d011187bbca7ea03
+r
+Bapp/src/main/java/com/jay/randomuser/view/detail/DetailActivity.kt,8/0/800c7fcb0a5ac63fab5962b05663e710ac312ea0

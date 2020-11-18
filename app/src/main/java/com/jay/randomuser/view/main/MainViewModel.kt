@@ -43,6 +43,7 @@ class MainViewModel(
 
     override val input: MainViewModelType.Input
         get() = this
+
     override val output: MainViewModelType.Output
         get() = this
 
