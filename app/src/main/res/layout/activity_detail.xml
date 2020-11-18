@@ -48,7 +48,8 @@
                 android:text="@{viewModel.output.user.email}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                app:layout_constraintTop_toBottomOf="@id/tv_name"
+                bind:onClick="@{() -> viewModel.input.emailClick()}" />
 
             <TextView
                 android:id="@+id/tv_cellphone"
@@ -59,7 +60,8 @@
                 android:text="@{viewModel.output.user.cellPhone}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_email" />
+                app:layout_constraintTop_toBottomOf="@id/tv_email"
+                bind:onClick="@{() -> viewModel.input.cellPhoneClick()}" />
 
             <TextView
                 android:id="@+id/tv_phone"
@@ -70,7 +72,8 @@
                 android:text="@{viewModel.output.user.phone}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_cellphone" />
+                app:layout_constraintTop_toBottomOf="@id/tv_cellphone"
+                bind:onClick="@{() -> viewModel.input.phoneClick()}" />
 
             <TextView
                 android:id="@+id/tv_address"
