@@ -1,5 +1,6 @@
 package com.jay.randomuser.view.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jay.randomuser.data.api.RemoteApi
@@ -47,13 +48,14 @@ class MainViewModel(
 
     private val _onGenderClick: PublishSubject<Unit> = PublishSubject.create()
     private val _genderSubject: BehaviorSubject<String> = BehaviorSubject.createDefault("male")
-    private val _onRefresh: PublishSubject<Unit> = PublishSubject.create()
+    private val _onRefreshSubject: PublishSubject<Unit> = PublishSubject.create()
     private val _scrollToTopSubject: PublishSubject<Unit> = PublishSubject.create()
     private val _userClickSubject: PublishSubject<UserResponse> = PublishSubject.create()
     private val _userSubject: BehaviorSubject<List<UserUiModel>> = BehaviorSubject.createDefault(emptyList())
     private val _loadMoreSubject: PublishSubject<Unit> = PublishSubject.create()
     private val _isPagingSubject: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
     private val _pageSubject: BehaviorSubject<Int> = BehaviorSubject.create()
+    private val _isRefreshSubject: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
 
     private val _userMapper: UserListMapper = UserListMapper(onClick = _userClickSubject)
 
@@ -78,7 +80,7 @@ class MainViewModel(
         get() = _genderFilter
 
     init {
-        val seedGenerator = _onRefresh
+        val seedGenerator = _onRefreshSubject
             .startWith(Unit)
             .map { UUID.randomUUID().toString() }
             .share()
@@ -90,7 +92,7 @@ class MainViewModel(
         )
             .replay(1).autoConnect()
 
-        val randomUser = seedWithGender
+        val refreshing = seedWithGender
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { showRefreshLoading(); showLoading() }
             .switchMapSingle { (seed, gender) ->
@@ -112,11 +114,9 @@ class MainViewModel(
         val paging = _loadMoreSubject
             .filter { _isPagingSubject.value != true }
             .doOnNext { _isPagingSubject.onNext(true) }
-            .withLatestFrom(
-                seedWithGenderWithPage,
-                BiFunction { _: Unit, seedWithGenderWithPage: Pair<Pair<String, String>, Int> -> seedWithGenderWithPage }
-            )
+            .withLatestFrom(seedWithGenderWithPage, BiFunction { _: Unit, seedWithGenderWithPage: Pair<Pair<String, String>, Int> -> seedWithGenderWithPage })
             .switchMapSingle { (seedWithGender, page) ->
+                Log.d(TAG, "$seedWithGender, $page")
                 val (seed, gender) = seedWithGender
                 api.getUsers(page = page, results = RESULT_COUNT, seed = seed, gender = gender)
                     .subscribeOn(Schedulers.io())
@@ -125,17 +125,23 @@ class MainViewModel(
             .doOnNext { _isPagingSubject.onNext(false) }
             .share()
 
-        randomUser.filter { it.isOnNext }
+        refreshing.filter { it.isOnNext }
             .map { it.value }
-            .map { it.results }
-            .map(_userMapper::mapper)
-            .subscribe(_userSubject::onNext)
+            .map { it.info.page + 1}
+            .subscribe(_pageSubject::onNext)
             .let(compositeDisposable::add)
 
         paging.filter { it.isOnNext }
             .map { it.value }
             .map { it.info.page + 1 }
             .subscribe(_pageSubject::onNext)
+            .let(compositeDisposable::add)
+
+        paging.filter { it.isOnNext }
+            .map { it.value }
+            .map { it.results }
+            .map(_userMapper::mapper)
+            .subscribe { _userSubject.onNext(_userSubject.value!! + it) }
             .let(compositeDisposable::add)
 
         _userSubject.observeOn(AndroidSchedulers.mainThread())
@@ -149,6 +155,7 @@ class MainViewModel(
         _onGenderClick.observeOn(AndroidSchedulers.mainThread())
             .subscribe(_genderFilter::setValue)
             .let(compositeDisposable::add)
+
     }
 
 
@@ -173,7 +180,7 @@ class MainViewModel(
     }
 
     override fun onRefresh() {
-        _onRefresh.onNext(Unit)
+        _onRefreshSubject.onNext(Unit)
     }
 
     override fun onMaleClick() {

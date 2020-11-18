@@ -24,6 +24,7 @@ fun RecyclerView.bindOnLoadMore(listener: OnLoadMoreListener) {
     })
 }
 
+@FunctionalInterface
 interface OnLoadMoreListener {
     fun onLoadMore()
 }
