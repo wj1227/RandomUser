@@ -30,6 +30,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
                 GenderSelectFragment.newInstance()
                     .showSafely(supportFragmentManager, GenderSelectFragment.tag)
             })
+            output.scrollToTop.observe(this@MainActivity, Observer {
+                viewDataBinding.rvResult.layoutManager?.smoothScrollToPosition(
+                    viewDataBinding.rvResult,
+                    null,
+                    0
+                )
+            })
         }
     }
 

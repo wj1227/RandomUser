@@ -165,6 +165,10 @@ class MainViewModel(
         _isRefreshSubject.observeOn(AndroidSchedulers.mainThread())
             .subscribe(_isRefresh::setValue)
             .let(compositeDisposable::add)
+
+        _scrollToTopSubject.observeOn(AndroidSchedulers.mainThread())
+            .subscribe(_scrollToTop::setValue)
+            .let(compositeDisposable::add)
     }
 
     override fun onGenderFilter() {
